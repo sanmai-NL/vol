@@ -1,9 +1,6 @@
 #!/bin/sh -ex
 
 ## A minimal POSIX shell library to help manage Docker data volumes.
-##
-## For example, to copy the contents of '/root/keystore/' into a volume "$VOL_KEYSTORE":
-## dir_out '/root/keystore/' | vol_in "$VOL_KEYSTORE"
 
 dir_out() {
     ## Pipes out a tar -f target as pax stream.

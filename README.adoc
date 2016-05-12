@@ -56,7 +56,7 @@ You can then call the functions defined inside it. You can place the sourcing st
 
 == Examples
 
-For example, to copy the contents of '/root/keystore/' into a volume "$VOL_KEYSTORE":
+For example, to copy the contents of `'/root/keystore/'` into a volume `"$VOL_KEYSTORE"`:
 
 [source,sh]
 ----

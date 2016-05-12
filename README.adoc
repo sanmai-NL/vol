@@ -1,0 +1,64 @@
+= vol
+:caution-caption: ☡ CAUTION
+:important-caption: ❗ IMPORTANT
+:note-caption: 🛈 NOTE
+:sectanchors:
+:sectlinks:
+:sectnumlevels: 6
+:sectnums:
+:source-highlighter: pygments
+:tip-caption: 💡 TIP
+:toc-placement: preamble
+:toc:
+:warning-caption: ⚠ WARNING
+
+A minimal POSIX shell library to help manage Docker data volumes.
+
+== Dependencies
+
+[options="header"]
+|===
+
+| Conditions | Type | Name (URL) | Version constraint
+
+| by necessity
+| software
+| https://www.docker.com[Docker]
+| >=1.10
+
+| by necessity
+| software
+| Any POSIX compliant shell. https://www.gnu.org/software/bash/[Bash] and http://www.linuxfromscratch.org/blfs/view/svn/postlfs/dash.html[(d)ash] should work.
+| *
+
+| by default
+| software
+| https://www.gnu.org/software/coreutils/coreutils.html[GNU Core utilities]
+| 8.25
+
+| by default
+| software
+| https://www.sudo.ws/[Sudo]
+| 1.8
+
+|===
+
+== To install
+
+Source the shell script library:
+
+[source,sh]
+----
+. '/path/to/vol.sh'
+----
+
+You can then call the functions defined inside it. You can place the sourcing statement in the shell's startup profile to always have it on hand.
+
+== Examples
+
+For example, to copy the contents of '/root/keystore/' into a volume "$VOL_KEYSTORE":
+
+[source,sh]
+----
+dir_out '/root/keystore/' | vol_in "$VOL_KEYSTORE"
+----

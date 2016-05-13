@@ -36,7 +36,7 @@ A minimal POSIX shell library to help manage Docker data volumes.
 | https://www.gnu.org/software/coreutils/coreutils.html[GNU Core utilities]
 | 8.25
 
-| by default
+| optional
 | software
 | https://www.sudo.ws/[Sudo]
 | 1.8
@@ -49,7 +49,7 @@ Source the shell script library:
 
 [source,sh]
 ----
-. '/path/to/vol.sh'
+. '/path/to/vol/*.sh'
 ----
 
 You can then call the functions defined inside it.
@@ -81,22 +81,21 @@ For example, to copy the contents of `'/root/keystore/'` into a volume:
 
 [source,sh]
 ----
-dir_out '/root/keystore/' | vol_in "$VOL"
-dir_out 'rust-gitignore/' | vol_in "$VOL"
+sudo dir_out.sh '/root/keystore/' | sudo vol_in.sh "$VOL"
 ----
 
 === To extract an existing archive into a volume
 
 [source,sh]
 ----
-vol_in "$VOL" < 'htdocs-vol.tar'
+sudo vol_in.sh "$VOL" < 'htdocs-vol.tar'
 ----
 
 === To export a volume as a compressed archive to a host over SSH
 
 [source,sh]
 ----
-vol_out "$VOL" | lbzip2 | ssh 'your_remote_host' sh -c '> '"$VOL"'.tar.bz2'
+sudo vol_out.sh "$VOL" | lbzip2 | ssh 'your_remote_host' sh -c 'cat > '"$VOL"'.tar.bz2'
 ----
 
 Instead of `lbzip2`, you may use any compression program compatible with GNU `tar`, such as `gzip` or `xz`.

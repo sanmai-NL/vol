@@ -52,13 +52,51 @@ Source the shell script library:
 . '/path/to/vol.sh'
 ----
 
-You can then call the functions defined inside it. You can place the sourcing statement in the shell's startup profile to always have it on hand.
+You can then call the functions defined inside it.
+You can place the sourcing statement in the shell's startup profile to always have it on hand.
 
-== Examples
+== To use
 
-For example, to copy the contents of `'/root/keystore/'` into a volume `"$VOL_KEYSTORE"`:
+=== Specify volume name(s)
+
+To conveniently start a child shell from which you can reference one volume named `'db_data-vol'`, you may issue e.g.:
 
 [source,sh]
 ----
-dir_out '/root/keystore/' | vol_in "$VOL_KEYSTORE"
+env VOL='db_data-vol' sh
 ----
+
+=== Create the data volume
+
+[source,sh]
+----
+sudo docker volume create --name="$VOL"
+----
+
+== Examples
+
+=== To copy a directory into a volume
+
+For example, to copy the contents of `'/root/keystore/'` into a volume:
+
+[source,sh]
+----
+dir_out '/root/keystore/' | vol_in "$VOL"
+dir_out 'rust-gitignore/' | vol_in "$VOL"
+----
+
+=== To extract an existing archive into a volume
+
+[source,sh]
+----
+vol_in "$VOL" < 'htdocs-vol.tar'
+----
+
+=== To export a volume as a compressed archive to a host over SSH
+
+[source,sh]
+----
+vol_out "$VOL" | lbzip2 | ssh 'your_remote_host' sh -c '> '"$VOL"'.tar.bz2'
+----
+
+Instead of `lbzip2`, you may use any compression program compatible with GNU `tar`, such as `gzip` or `xz`.

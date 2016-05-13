@@ -12,7 +12,7 @@
 :toc:
 :warning-caption: ⚠ WARNING
 
-A minimal POSIX shell library to help manage Docker data volumes.
+A minimal POSIX compliant shell script library to help manage Docker data volumes.
 
 == Dependencies
 
@@ -45,17 +45,9 @@ A minimal POSIX shell library to help manage Docker data volumes.
 
 == To install
 
-Source the shell script library:
+Add a clone of this repository to your shell's `PATH` environment variable, e.g. in  `"$HOME/.pam_environment"`.
 
-[source,sh]
-----
-. '/path/to/vol/*.sh'
-----
-
-You can then call the functions defined inside it.
-You can place the sourcing statement in the shell's startup profile to always have it on hand.
-
-== To use
+== To prepare
 
 === Specify volume name(s)
 
@@ -73,7 +65,9 @@ env VOL='db_data-vol' sh
 sudo docker volume create --name="$VOL"
 ----
 
-== Examples
+== To use
+
+A few examples follow.
 
 === To copy a directory into a volume
 
